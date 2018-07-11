@@ -68,6 +68,9 @@
 	$(document).ready(function () {
 		var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
+		var myFreqs   = ['5658','5732','5843','5917'];
+		var myFreqs2  = ['5645' ,'5685' ,'5760' ,'5905' ,'5945'];
+
 		voice_label( {{ lang_id }} );
 		
 		socket.on('heartbeat', function (msg) {
@@ -258,6 +261,92 @@
 			return false;
 		});
 
+		$('button#myfreqs_1').click(function (event) {
+				
+			setTimeout(function(){
+
+				$(".panel-heading").parent().removeClass("panel-success").removeClass("panel-info").removeClass("panel-danger").removeClass("panel-warning").removeClass("panel-primary").addClass("panel-success");
+				
+				$($(".set_frequency")[0]).find("a").filter("[data-frequency="+ myFreqs[0] +"]").click();
+				$($(".set_frequency")[1]).find("a").filter("[data-frequency="+ myFreqs[3] +"]").click();
+				$($(".set_frequency")[2]).find("a").filter("[data-frequency="+ myFreqs[3] +"]").click();
+				$($(".set_frequency")[3]).find("a").filter("[data-frequency="+ myFreqs[3] +"]").click();
+				$($(".set_frequency")[4]).find("a").filter("[data-frequency="+ myFreqs[3] +"]").click();
+
+
+				return false;
+			},0);	
+
+		});
+
+		$('button#myfreqs_2').click(function (event) {
+
+			setTimeout(function(){
+				
+				$(".panel-heading").parent().removeClass("panel-success").removeClass("panel-info").removeClass("panel-danger").removeClass("panel-warning").removeClass("panel-primary").addClass("panel-info");
+
+				$($(".set_frequency")[0]).find("a").filter("[data-frequency="+ myFreqs[0] +"]").click();
+				$($(".set_frequency")[1]).find("a").filter("[data-frequency="+ myFreqs[3] +"]").click();
+				$($(".set_frequency")[2]).find("a").filter("[data-frequency="+ myFreqs[2] +"]").click();
+				$($(".set_frequency")[3]).find("a").filter("[data-frequency="+ myFreqs[2] +"]").click();
+				$($(".set_frequency")[4]).find("a").filter("[data-frequency="+ myFreqs[2] +"]").click();
+
+				$("[data-pilot_id=1]").val("Piloto1").change();
+				$("[data-pilot_id=2]").val("Piloto2").change();
+				$("[data-pilot_id=3]").val("---").change();
+				$("[data-pilot_id=4]").val("----").change();
+				$("[data-pilot_id=5]").val("-----").change();
+				
+				return false;
+			},0);	
+
+		});
+
+		$('button#myfreqs_3').click(function (event) {
+
+			setTimeout(function(){
+
+				$(".panel-heading").parent().removeClass("panel-success").removeClass("panel-info").removeClass("panel-danger").removeClass("panel-warning").removeClass("panel-primary").addClass("panel-danger");
+
+				$($(".set_frequency")[0]).find("a").filter("[data-frequency="+ myFreqs[0] +"]").click();
+				$($(".set_frequency")[1]).find("a").filter("[data-frequency="+ myFreqs[1] +"]").click();
+				$($(".set_frequency")[2]).find("a").filter("[data-frequency="+ myFreqs[3] +"]").click();
+				$($(".set_frequency")[3]).find("a").filter("[data-frequency="+ myFreqs[1] +"]").click();
+				$($(".set_frequency")[4]).find("a").filter("[data-frequency="+ myFreqs[1] +"]").click();
+
+				$("[data-pilot_id=1]").val("Piloto1").change();
+				$("[data-pilot_id=2]").val("Piloto2").change();
+				$("[data-pilot_id=3]").val("Piloto3").change();
+				$("[data-pilot_id=4]").val("----").change();
+				$("[data-pilot_id=5]").val("-----").change();
+
+				return false;
+			},0);	
+
+		});
+
+		$('button#myfreqs_4').click(function (event) {
+
+			setTimeout(function(){
+
+				$(".panel-heading").parent().removeClass("panel-success").removeClass("panel-info").removeClass("panel-danger").removeClass("panel-warning").removeClass("panel-primary").addClass("panel-warning");
+
+				$($(".set_frequency")[0]).find("a").filter("[data-frequency="+ myFreqs[0] +"]").click();
+				$($(".set_frequency")[1]).find("a").filter("[data-frequency="+ myFreqs[1] +"]").click();
+				$($(".set_frequency")[2]).find("a").filter("[data-frequency="+ myFreqs[2] +"]").click();
+				$($(".set_frequency")[3]).find("a").filter("[data-frequency="+ myFreqs[3] +"]").click();
+				$($(".set_frequency")[4]).find("a").filter("[data-frequency="+ myFreqs[0] +"]").click();
+
+				$("[data-pilot_id=1]").val("Piloto1").change();
+				$("[data-pilot_id=2]").val("Piloto2").change();
+				$("[data-pilot_id=3]").val("Piloto3").change();
+				$("[data-pilot_id=4]").val("Piloto4").change();
+				$("[data-pilot_id=5]").val("-----").change();
+
+				return false;
+			},0);	
+
+		});
 
 		$('.set_profile li a').click(function (event) {
 			var data = {
@@ -349,6 +438,25 @@
 
 </script>
 {% endblock %} {% block content %}
+
+<!-- My preferred frequencies -->
+<div class="container">
+
+	<div class="btn-group-vertical" style="display:block;">
+		<div class="btn-group">
+			<button class="btn btn-lg bg-success" id="myfreqs_1" onclick="this.blur();">Underground Freqs #1: 5658</button>
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-lg bg-info" id="myfreqs_2" onclick="this.blur();">Underground Freqs #2: 5658 | 5917</button>
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-lg bg-danger" id="myfreqs_3" onclick="this.blur();">Underground Freqs #3: 5658 | 5732 | 5917</button>
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-lg bg-warning" id="myfreqs_4" onclick="this.blur();">Underground Freqs #4: 5658 | 5732 | 5843 | 5917</button>
+		</div>
+	</div>
+</div>
 
 <!--Display node data-->
 <h4>Nodes</h4>
