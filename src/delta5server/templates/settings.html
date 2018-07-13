@@ -67,7 +67,8 @@
 	
 	$(document).ready(function () {
 		var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
-
+		
+		var raceband  = ['0000','5658','5695','5732','5769','5806','5843','5880','5917']
 		var myFreqs   = ['5658','5732','5843','5917'];
 		var myFreqs2  = ['5645' ,'5685' ,'5760' ,'5905' ,'5945'];
 
@@ -261,6 +262,45 @@
 			return false;
 		});
 
+		$('[id*="myfreqs_all"]').click(function (event) {
+
+			_id = $(this).attr("id"); 
+
+			setTimeout(function(){
+
+
+			_idx = _id.slice(-1);
+
+			$(".panel-heading").parent().removeClass("panel-success").removeClass("panel-info").removeClass("panel-danger").removeClass("panel-warning").removeClass("panel-primary");
+
+			$($(".set_frequency")[0]).find("a").filter("[data-frequency="+ raceband[_idx] +"]").click();
+			$($(".set_frequency")[1]).find("a").filter("[data-frequency="+ raceband[_idx] +"]").click();
+			$($(".set_frequency")[2]).find("a").filter("[data-frequency="+ raceband[_idx] +"]").click();
+			$($(".set_frequency")[3]).find("a").filter("[data-frequency="+ raceband[_idx] +"]").click();
+			$($(".set_frequency")[4]).find("a").filter("[data-frequency="+ raceband[_idx] +"]").click();
+
+
+			return false;
+
+			},0);	
+
+		});
+
+		$('button#allfreqs').click(function (event) {
+			$("[data-frequency]").each(function(){
+					$(this).show();
+			});
+		});
+
+		$('button#onlyraceband').click(function (event) {
+			$("[data-frequency]").each(function(){
+				//console.log(raceband.indexOf($(this).attr("data-frequency")));
+				if(raceband.indexOf($(this).attr("data-frequency"))===-1){
+					$(this).hide();
+				}
+			});
+		});
+
 		$('button#myfreqs_1').click(function (event) {
 				
 			setTimeout(function(){
@@ -442,6 +482,37 @@
 <!-- My preferred frequencies -->
 <div class="container">
 
+	
+<!-- Raceband Frequencies helper -->
+<table class="table table-bordered text-center">
+	<thead class="thead-dark">
+		<tr>
+			<th class="text-left" scope="col">Ch</th>
+			<th class="text-center" scope="col">C1</th>
+			<th class="text-center" scope="col">C2</th>
+			<th class="text-center" scope="col">C3</th>
+			<th class="text-center" scope="col">C4</th>
+			<th class="text-center" scope="col">C5</th>
+			<th class="text-center" scope="col">C6</th>
+			<th class="text-center" scope="col">C7</th>
+			<th class="text-center" scope="col">C8</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">RB Freq</th>
+			<td>5658</td>
+			<td>5695</td>
+			<td>5732</td>
+			<td>5769</td>
+			<td>5806</td>
+			<td>5843</td>
+			<td>5880</td>
+			<td>5917</td>
+		</tr>
+	</tbody>
+</table>
+
 	<div class="btn-group-vertical" style="display:block;">
 		<div class="btn-group">
 			<button class="btn btn-lg bg-success" id="myfreqs_1" onclick="this.blur();">Underground Freqs #1: 5658</button>
@@ -457,6 +528,47 @@
 		</div>
 	</div>
 </div>
+
+<!-- Simplify the dropdowns -->
+
+
+<div class="btn-group btn-group-justified">
+	<div class="btn-group">
+		<button class="btn btn-block btn-sm btn-warning" id="onlyraceband" onclick="this.blur();">Only Raceband (C)</button>
+	</div>
+	<div class="btn-group">
+		<button class="btn btn-block btn-sm btn-warning" id="allfreqs" onclick="this.blur();">All Frequencies</button>
+	</div>
+</div>
+
+<br/>
+<div class="btn-group btn-group-justified">
+	<div class="btn-group">
+		<button class="btn btn-sm btn-success" id="myfreqs_all_1" onclick="this.blur();">All C1</button>
+	</div>
+	<div class="btn-group">
+		<button class="btn btn-sm btn-light" id="myfreqs_all_2" onclick="this.blur();">All C2</button>
+	</div>
+	<div class="btn-group">
+		<button class="btn btn-sm btn-success" id="myfreqs_all_3" onclick="this.blur();">All C3</button>
+	</div>
+	<div class="btn-group">
+		<button class="btn btn-sm btn-light" id="myfreqs_all_4" onclick="this.blur();">All C4</button>
+	</div>
+	<div class="btn-group">
+		<button class="btn btn-sm btn-success" id="myfreqs_all_5" onclick="this.blur();">All C5</button>
+	</div>
+	<div class="btn-group">
+		<button class="btn btn-sm btn-light" id="myfreqs_all_6" onclick="this.blur();">All C6</button>
+	</div>
+	<div class="btn-group">
+		<button class="btn btn-sm btn-success" id="myfreqs_all_7" onclick="this.blur();">All C7</button>
+	</div>
+	<div class="btn-group">
+		<button class="btn btn-sm btn-light" id="myfreqs_all_8" onclick="this.blur();">All C8</button>
+	</div>
+</div>
+<hr>
 
 <!--Display node data-->
 <h4>Nodes</h4>
