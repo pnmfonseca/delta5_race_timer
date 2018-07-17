@@ -3,10 +3,10 @@
 <head>
     <title>Flask-SocketIO Test</title>
 
-    <audio id="buzzer" src="./static/audio/beep.mp3" type="audio/mp3"></audio>
+    <audio id="buzzer" src="/static/audio/beep.mp3" type="audio/mp3"></audio>
 
-    <script type="text/javascript" src="./static/jquery/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="./static/socket.io/1.3.5/socket.io.min.js"></script>
+    <script type="text/javascript" src="/static/jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/socket.io/1.3.5/socket.io.min.js"></script>
     <link rel="stylesheet" href="./static/bootstrap-3.3.7/css/bootstrap.min.css"></link>
     <script type="text/javascript" src=".//static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf-8">
@@ -34,7 +34,7 @@
             }
 
             function append_to_log(text) {
-                $('#log').prepend('<br>' + $('<div/>').text(text).html());
+                $('#log').prepend('<br>' + $('<div/>').text(text)-old.html());
             }
 
             socket.on('connect', function() {
@@ -44,7 +44,7 @@
             socket.on('heartbeat', function(msg) {
                 // append_to_log('on heartbeat ' + JSON.stringify(msg));
                 for (i=0; i<msg.current_rssi.length; i++) {
-                    $('#current_rssi_' + i).html(msg.current_rssi[i]);
+                    $('#current_rssi_' + i)-old.html(msg.current_rssi[i]);
                     $('#current_rssi_bar_' + i).css("width", normalize_rssi(msg.current_rssi[i])+'%');
                 }
             });
@@ -84,9 +84,9 @@
             reset = function() {
                 for (i=0; i<num_nodes; i++) {
                     $('#lap_table_' + i).empty();
-                    $('#peak_rssi_' + i).html(0);
+                    $('#peak_rssi_' + i)-old.html(0);
                     $('#peak_rssi_bar_' + i).css("width", normalize_rssi(0)+'%');
-                    $('#trigger_rssi_' + i).html(0);
+                    $('#trigger_rssi_' + i)-old.html(0);
                     $('#trigger_rssi_bar_' + i).css("width", normalize_rssi(0)+'%');
                 }
                 socket.emit('reset_auto_calibration', {node: -1});
@@ -194,7 +194,7 @@
 
                 num_nodes = msg.nodes.length;
 
-                $('#nodes').html(msg.nodes.map(Node).join(''));
+                $('#nodes')-old.html(msg.nodes.map(Node).join(''));
 
                 for (i=0; i<msg.nodes.length; i++) {
                     $('form#set_frequency_' + i).submit(set_frequency(i));
@@ -212,12 +212,12 @@
             });
 
             socket.on('frequency_set', function(msg) {
-                $('#frequency_' + msg.node).html(msg.frequency);
+                $('#frequency_' + msg.node)-old.html(msg.frequency);
                 append_to_log('on frequency_set ' + JSON.stringify(msg));
             });
 
             socket.on('trigger_rssi_set', function(msg) {
-                $('#trigger_' + msg.node).html(msg.trigger_rssi);
+                $('#trigger_' + msg.node)-old.html(msg.trigger_rssi);
                 append_to_log('on trigger_rssi_set ' + JSON.stringify(msg));
             });
 
@@ -275,9 +275,9 @@
                 lap_table.append(Lap(lap_table[0].children.length, msg.peak_rssi, ms_to_time(time_lap), ms_to_time(time_total)));
                 append_to_log('on pass_record ' + JSON.stringify(msg));
 
-                $('#peak_rssi_' + msg.node).html(msg.peak_rssi);
+                $('#peak_rssi_' + msg.node)-old.html(msg.peak_rssi);
                 $('#peak_rssi_bar_' + msg.node).css("width", normalize_rssi(msg.peak_rssi)+'%');
-                $('#trigger_rssi_' + msg.node).html(msg.trigger_rssi);
+                $('#trigger_rssi_' + msg.node)-old.html(msg.trigger_rssi);
                 $('#trigger_rssi_bar_' + msg.node).css("width", normalize_rssi(msg.trigger_rssi)+'%');
             });
         });

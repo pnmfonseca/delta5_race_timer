@@ -1,10 +1,10 @@
-{% extends "layout.html" %} {% block title %}Hardware Log{% endblock %} {% block head %}
+{% extends "layout-old.html" %} {% block title %}Hardware Log{% endblock %} {% block head %}
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function () {
 		var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
 		function append_to_log(text) {
-			$('#log').prepend('<br>' + $('<div/>').text(text).html());
+			$('#log').prepend('<br>' + $('<div/>').text(text)-old.html());
 		}
 
 		socket.on('hardware_log', function (msg) {

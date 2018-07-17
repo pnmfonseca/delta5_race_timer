@@ -1,4 +1,4 @@
-{% extends "layout.html" %} {% block title %}Rounds{% endblock %} {% block head %} {% endblock %} {% block content %}
+{% extends "layout-old.html" %} {% block title %}Rounds{% endblock %} {% block head %} {% endblock %} {% block content %}
 
 <!--Display the rounds-->
 {% for heat in rounds.query.with_entities(rounds.heat_id).distinct().order_by(rounds.heat_id) %}

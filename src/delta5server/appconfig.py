@@ -35,7 +35,7 @@ RACE_START = datetime.now() # Updated on race start commands
 # Routes
 #
 
-@APP.route('/')
+@APP.route('/old/')
 def index():
     '''Route to round summary page.'''
     # A more generic and flexible way of viewing saved race data is needed
@@ -79,23 +79,23 @@ def index():
     #     heat_fast_laps.append(fast_laps)
     # print heat_max_laps
     # print heat_fast_laps
-    return render_template('rounds.html', num_nodes=RACE.num_nodes, rounds=SavedRace, \
+    return render_template('rounds-old.html', num_nodes=RACE.num_nodes, rounds=SavedRace, \
         pilots=Pilot, heats=Heat)
         #, heat_max_laps=heat_max_laps, heat_fast_laps=heat_fast_laps
 
-@APP.route('/heats')
+@APP.route('/old/heats')
 def heats():
     '''Route to heat summary page.'''
-    return render_template('heats.html', num_nodes=RACE.num_nodes, heats=Heat, pilots=Pilot, \
+    return render_template('heats-old.html', num_nodes=RACE.num_nodes, heats=Heat, pilots=Pilot, \
         frequencies=[node.frequency for node in INTERFACE.nodes], \
         channels=[Frequency.query.filter_by(frequency=node.frequency).first().channel \
             for node in INTERFACE.nodes])
 
-@APP.route('/race')
+@APP.route('/old/race')
 @requires_auth
 def race():
     '''Route to race management page.'''
-    return render_template('race.html', num_nodes=RACE.num_nodes,
+    return render_template('race-old.html', num_nodes=RACE.num_nodes,
                            current_heat=RACE.current_heat,
                            heats=Heat, pilots=Pilot,
                            fix_race_time=FixTimeRace.query.get(1).race_time_sec,
@@ -104,12 +104,12 @@ def race():
         channels=[Frequency.query.filter_by(frequency=node.frequency).first().channel
             for node in INTERFACE.nodes])
 
-@APP.route('/settings')
+@APP.route('/old/settings')
 @requires_auth
 def settings():
     '''Route to settings page.'''
 
-    return render_template('settings.html', num_nodes=RACE.num_nodes,
+    return render_template('settings-old.html', num_nodes=RACE.num_nodes,
                            pilots=Pilot,
                            frequencies=Frequency,
                            heats=Heat,
@@ -120,15 +120,15 @@ def settings():
 
 # Debug Routes
 
-@APP.route('/hardwarelog')
+@APP.route('/old/hardwarelog')
 @requires_auth
 def hardwarelog():
     '''Route to hardware log page.'''
-    return render_template('hardwarelog.html')
+    return render_template('hardwarelog-old.html')
 
-@APP.route('/database')
+@APP.route('/old/database')
 @requires_auth
 def database():
     '''Route to database page.'''
-    return render_template('database.html', pilots=Pilot, heats=Heat, currentlaps=CurrentLap, \
+    return render_template('database-old.html', pilots=Pilot, heats=Heat, currentlaps=CurrentLap, \
         savedraces=SavedRace, frequencies=Frequency, )

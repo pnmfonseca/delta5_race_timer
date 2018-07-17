@@ -45,15 +45,15 @@ def parse_json(data):
 @app.route('/')
 def index():
     template_data = { }
-    return render_template('index.html', async_mode=socketio.async_mode, **template_data)
+    return render_template('index-old.html', async_mode=socketio.async_mode, **template_data)
 
 @app.route('/graphs')
 def graphs():
-    return render_template('graphs.html', async_mode=socketio.async_mode)
+    return render_template('graphs-old.html', async_mode=socketio.async_mode)
 
 @app.route('/rssi')
 def rssi():
-    return render_template('rssi.html', async_mode=socketio.async_mode)
+    return render_template('rssi-old.html', async_mode=socketio.async_mode)
 
 @socketio.on('connect')
 def connect_handler():

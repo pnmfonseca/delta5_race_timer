@@ -1,6 +1,6 @@
-{% extends "layout.html" %} {% block title %}Race{% endblock %}{% block head %}
+{% extends "layout-old.html" %} {% block title %}Race{% endblock %}{% block head %}
 
-<audio id="buzzer" src="./static/audio/buzzer.mp3" type="audio/mp3"></audio>
+<audio id="buzzer" src="/static/audio/buzzer.mp3" type="audio/mp3"></audio>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function () {
@@ -38,14 +38,14 @@
 
 		socket.on('heartbeat', function (msg) {
 			for (i = 0; i < msg.current_rssi.length; i++) {
-				$('.current_rssi_' + i).html(msg.current_rssi[i]);
+				$('.current_rssi_' + i)-old.html(msg.current_rssi[i]);
 			}
 		});
 
 		socket.on('node_data', function (msg) {
 			for (i = 0; i < msg.frequency.length; i++) {
-				$('.trigger_rssi_' + i).html(msg.trigger_rssi[i]);
-				$('.peak_rssi_' + i).html(msg.peak_rssi[i]);
+				$('.trigger_rssi_' + i)-old.html(msg.trigger_rssi[i]);
+				$('.peak_rssi_' + i)-old.html(msg.peak_rssi[i]);
 			}
 		});
 
@@ -101,9 +101,9 @@
 		})
 		
 		socket.on('current_heat', function (msg) {
-			$('.current_heat').html('Heat ' + msg.current_heat);
+			$('.current_heat')-old.html('Heat ' + msg.current_heat);
 			for (i = 0; i < msg.callsign.length; i++) {
-				$('.callsign_' + i).html(msg.callsign[i]);
+				$('.callsign_' + i)-old.html(msg.callsign[i]);
 			}
 		});
 
@@ -262,7 +262,7 @@
 		</div>
 		<button type="button" class="btn btn-default" id="start_race" onclick="this.blur();">Start Race</button>
 		<button type="button" class="btn btn-default" id="start_race_2min" onclick="this.blur();">Start Fixed Time Race</button> {% include
-		"build_timer.html" %}
+		"build_timer-old.html" %}
 		<button type="button" class="btn btn-default" id="stop_race" disabled="disabled" onclick="this.blur();">Stop Race</button>
 		<button type="button" class="btn btn-default" id="save_laps" disabled="disabled" onclick="this.blur();">Save Laps</button>
 		<button type="button" class="btn btn-default" id="clear_laps" disabled="disabled" onclick="this.blur();">Clear Laps</button>
