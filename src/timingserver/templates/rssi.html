@@ -12,7 +12,7 @@
             var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
             function append_to_log(text) {
-                $('#log').append('<br>' + $('<div/>').text(text)-old.html());
+                $('#log').append('<br>' + $('<div/>').text(text).html());
             }
 
             socket.on('heartbeat', function(msg) {
